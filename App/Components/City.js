@@ -22,6 +22,17 @@ var styles = StyleSheet.create({
     height: 300,
     width: 300,
     alignSelf: 'center'
+  },
+  info: {
+    marginTop: 40
+  },
+  main: {
+    fontSize: 21,
+    color: '#FCFCFC'
+  },
+  secondary: {
+    fontSize: 17,
+    color: '#FCFCFC'
   }
 });
 
@@ -35,6 +46,12 @@ export default class City extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>{this.props.data.city.name}</Text>
         <Image style={styles.image} source={{uri: mapUri}}/>
+        <View style={styles.info}>
+          <Text style={styles.main}>Air Quality Index 25</Text>
+          <Text style={styles.secondary}>PM2.5 2.5</Text>
+          <Text style={styles.secondary}>NO2 26</Text>
+          <Text style={styles.secondary}>CO 7</Text>
+        </View>
         {showErr}
       </View>
     )
