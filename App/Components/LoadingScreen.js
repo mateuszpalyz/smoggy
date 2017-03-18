@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 
 var styles = StyleSheet.create({
+  container: {
+    marginTop: 180
+  },
   title: {
     marginBottom: 20,
     fontSize: 25,
@@ -24,7 +27,7 @@ var styles = StyleSheet.create({
 export default class LoadingScreen extends Component {
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         <Image style={styles.image} source={require('../Images/tower-and-fumes.png')}/>
         <Text style={styles.title}>Smoggy</Text>
         <ActivityIndicator color="#FCFCFC" size="large"></ActivityIndicator>
