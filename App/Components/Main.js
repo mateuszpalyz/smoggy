@@ -10,10 +10,9 @@ import {
 
 var styles = StyleSheet.create({
   mainContainer: {
+    backgroundColor: '#1C1F36',
     flex: 1,
-    marginTop: 65,
-    flexDirection: 'column',
-    backgroundColor: '#1C1F36'
+    flexDirection: 'column'
   }
 });
 

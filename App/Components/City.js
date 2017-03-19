@@ -9,12 +9,14 @@ import {
 } from 'react-native';
 import PercentageCircle from './PercentageCircle';
 import Scale from './Scale';
+import Search from './Search';
 import FontAwesome from 'react-native-fontawesome';
 
 var styles = StyleSheet.create({
   container: {
+    backgroundColor: '#1C1F36',
     height: '100%',
-    marginTop: 10
+    marginTop: 65,
   },
   title: {
     color: '#FCFCFC',
@@ -74,7 +76,7 @@ var styles = StyleSheet.create({
     fontSize: 20
   },
   buttons: {
-    bottom: 10,
+    bottom: 70,
     flexDirection: 'row',
     position: 'absolute'
   },
@@ -85,6 +87,11 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     width: 90
   },
+  error: {
+    color: 'red',
+    fontSize: 25,
+    textAlign: 'center'
+  }
 });
 
 export default class City extends Component {
@@ -96,7 +103,10 @@ export default class City extends Component {
   }
 
   goToSearch() {
-    console.log('search');
+    this.props.navigator.push({
+      title: 'Search',
+      component: Search
+    });
   }
 
   goToCredits() {
@@ -107,8 +117,7 @@ export default class City extends Component {
     var c1 = this.props.data.city.geo[0];
     var c2 = this.props.data.city.geo[1];
     var mapUri = `https://maps.googleapis.com/maps/api/staticmap?center=${c1},${c2}&zoom=12&size=300x300&markers=color:red%7Clabel%7C${c1},${c2}&key=AIzaSyBBHDld8xe2WP-yRs0albnVQN9nmWIkLk4`;
-    console.log(mapUri);
-    var showErr = (this.props.error ? <Text>{this.props.error}</Text> : <View></View>);
+    var showErr = (this.props.error ? <Text style={styles.error}>{this.props.error}</Text> : <View></View>);
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{this.props.data.city.name}</Text>
@@ -136,6 +145,7 @@ export default class City extends Component {
             <Text style={styles.secondary}>CO</Text>
           </View>
         </View>
+        {showErr}
         <View style={styles.buttons}>
           <TouchableHighlight
             style={styles.button}
@@ -156,7 +166,6 @@ export default class City extends Component {
             <Text style={styles.buttonText}>Credits</Text>
           </TouchableHighlight>
         </View>
-        {showErr}
       </View>
     )
   }

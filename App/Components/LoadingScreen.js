@@ -9,7 +9,8 @@ import {
 
 var styles = StyleSheet.create({
   container: {
-    marginTop: 180
+    backgroundColor: '#1C1F36',
+    marginTop: 245
   },
   title: {
     marginBottom: 20,
