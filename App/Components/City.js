@@ -8,6 +8,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import PercentageCircle from './PercentageCircle';
+import Scale from './Scale';
 import FontAwesome from 'react-native-fontawesome';
 
 var styles = StyleSheet.create({
@@ -88,7 +89,10 @@ var styles = StyleSheet.create({
 
 export default class City extends Component {
   goToScale() {
-    console.log('scale');
+    this.props.navigator.push({
+      title: 'Air Quality Index Scale',
+      component: Scale
+    });
   }
 
   goToSearch() {
@@ -135,19 +139,19 @@ export default class City extends Component {
         <View style={styles.buttons}>
           <TouchableHighlight
             style={styles.button}
-            onPress={this.goToScale}
+            onPress={this.goToScale.bind(this)}
             underlayColor='#884ADF'>
             <Text style={styles.buttonText}><FontAwesome>info</FontAwesome></Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.button}
-            onPress={this.goToSearch}
+            onPress={this.goToSearch.bind(this)}
             underlayColor='#884ADF'>
             <Text style={styles.buttonText}><FontAwesome>search</FontAwesome></Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.button}
-            onPress={this.goToCredits}
+            onPress={this.goToCredits.bind(this)}
             underlayColor='#884ADF'>
             <Text style={styles.buttonText}>Credits</Text>
           </TouchableHighlight>

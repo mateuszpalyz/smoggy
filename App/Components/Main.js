@@ -49,7 +49,7 @@ export default class Main extends Component {
 
   render () {
     var page = (
-      this.state.isLoading ? <LoadingScreen/> : <City data={this.state.data} error={this.state.error}/>
+      this.state.isLoading ? <LoadingScreen/> : <City data={this.state.data} error={this.state.error} navigator={this.props.navigator}/>
     );
     return (
       <View style={styles.mainContainer}>
