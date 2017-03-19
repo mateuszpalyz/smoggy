@@ -100,9 +100,10 @@ export default class City extends Component {
   }
 
   render () {
-    var lat = this.props.data.city.geo[0];
-    var lon = this.props.data.city.geo[1];
-    var mapUri = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=12&size=300x300&markers=color:red%7Clabel%7C${lat},${lon}`;
+    var c1 = this.props.data.city.geo[0];
+    var c2 = this.props.data.city.geo[1];
+    var mapUri = `https://maps.googleapis.com/maps/api/staticmap?center=${c2},${c1}&zoom=12&size=300x300&markers=color:red%7Clabel%7C${c2},${c1}&key=AIzaSyBBHDld8xe2WP-yRs0albnVQN9nmWIkLk4`;
+    console.log(mapUri);
     var showErr = (this.props.error ? <Text>{this.props.error}</Text> : <View></View>);
     return (
       <View style={styles.container}>
