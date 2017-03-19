@@ -4,12 +4,15 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
 import PercentageCircle from './PercentageCircle';
+import FontAwesome from 'react-native-fontawesome';
 
 var styles = StyleSheet.create({
   container: {
+    height: '100%',
     marginTop: 10
   },
   title: {
@@ -63,10 +66,39 @@ var styles = StyleSheet.create({
     color: '#884ADF',
     fontSize: 19,
     textAlign: 'center'
-  }
+  },
+  buttonText: {
+    alignSelf: 'center',
+    color: '#D7D7D7',
+    fontSize: 20
+  },
+  buttons: {
+    bottom: 10,
+    flexDirection: 'row',
+    position: 'absolute'
+  },
+  button: {
+    backgroundColor: '#1C1F36',
+    flexGrow: 1,
+    height: 50,
+    justifyContent: 'center',
+    width: 90
+  },
 });
 
 export default class City extends Component {
+  goToScale() {
+    console.log('scale');
+  }
+
+  goToSearch() {
+    console.log('search');
+  }
+
+  goToCredits() {
+    console.log('credits');
+  }
+
   render () {
     var lat = this.props.data.city.geo[0];
     var lon = this.props.data.city.geo[1];
@@ -99,7 +131,26 @@ export default class City extends Component {
             <Text style={styles.secondary}>CO</Text>
           </View>
         </View>
-        <View style={styles.circle}></View>
+        <View style={styles.buttons}>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.goToScale}
+            underlayColor='#884ADF'>
+            <Text style={styles.buttonText}><FontAwesome>info</FontAwesome></Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.goToSearch}
+            underlayColor='#884ADF'>
+            <Text style={styles.buttonText}><FontAwesome>search</FontAwesome></Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={styles.button}
+            onPress={this.goToCredits}
+            underlayColor='#884ADF'>
+            <Text style={styles.buttonText}>Credits</Text>
+          </TouchableHighlight>
+        </View>
         {showErr}
       </View>
     )
