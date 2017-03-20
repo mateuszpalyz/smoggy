@@ -12,6 +12,7 @@ import Scale from './Scale';
 import Search from './Search';
 import Credits from './Credits';
 import FontAwesome from 'react-native-fontawesome';
+import _ from 'lodash';
 
 var styles = StyleSheet.create({
   container: {
@@ -120,6 +121,9 @@ export default class City extends Component {
   render () {
     var c1 = this.props.data.city.geo[0];
     var c2 = this.props.data.city.geo[1];
+    var pm25 = _.get(this.props, 'data.iaqi.pm25.v', 'n/a');
+    var no2 = _.get(this.props, 'data.iaqi.no2.v', 'n/a');
+    var co = _.get(this.props, 'data.iaqi.co.v', 'n/a');
     var mapUri = `https://maps.googleapis.com/maps/api/staticmap?center=${c1},${c2}&zoom=12&size=300x300&markers=color:red%7Clabel%7C${c1},${c2}&key=AIzaSyBBHDld8xe2WP-yRs0albnVQN9nmWIkLk4`;
     var showErr = (this.props.error ? <Text style={styles.error}>{this.props.error}</Text> : <View></View>);
     return (
@@ -137,15 +141,15 @@ export default class City extends Component {
         </View>
         <View style={styles.info}>
           <View style={styles.infoBox}>
-            <Text style={styles.secondaryValue}>{this.props.data.iaqi.pm25.v}</Text>
+            <Text style={styles.secondaryValue}>{pm25}</Text>
             <Text style={styles.secondary}>PM2.5</Text>
           </View>
           <View style={styles.infoBox}>
-            <Text style={styles.secondaryValue}>{this.props.data.iaqi.no2.v}</Text>
+            <Text style={styles.secondaryValue}>{no2}</Text>
             <Text style={styles.secondary}>NO2</Text>
           </View>
           <View style={styles.infoBox}>
-            <Text style={styles.secondaryValue}>{this.props.data.iaqi.co.v}</Text>
+            <Text style={styles.secondaryValue}>{co}</Text>
             <Text style={styles.secondary}>CO</Text>
           </View>
         </View>
