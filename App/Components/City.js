@@ -10,6 +10,7 @@ import {
 import PercentageCircle from './PercentageCircle';
 import Scale from './Scale';
 import Search from './Search';
+import Credits from './Credits';
 import FontAwesome from 'react-native-fontawesome';
 
 var styles = StyleSheet.create({
@@ -110,7 +111,10 @@ export default class City extends Component {
   }
 
   goToCredits() {
-    console.log('credits');
+    this.props.navigator.push({
+      title: 'Credits',
+      component: Credits
+    });
   }
 
   render () {
