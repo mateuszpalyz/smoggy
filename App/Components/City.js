@@ -88,11 +88,6 @@ var styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     width: 90
-  },
-  error: {
-    color: 'red',
-    fontSize: 25,
-    textAlign: 'center'
   }
 });
 
@@ -125,7 +120,6 @@ export default class City extends Component {
     var no2 = _.get(this.props, 'data.iaqi.no2.v', 'n/a');
     var co = _.get(this.props, 'data.iaqi.co.v', 'n/a');
     var mapUri = `https://maps.googleapis.com/maps/api/staticmap?center=${c1},${c2}&zoom=12&size=300x300&markers=color:red%7Clabel%7C${c1},${c2}&key=AIzaSyBBHDld8xe2WP-yRs0albnVQN9nmWIkLk4`;
-    var showErr = (this.props.error ? <Text style={styles.error}>{this.props.error}</Text> : <View></View>);
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{this.props.data.city.name}</Text>
@@ -153,7 +147,6 @@ export default class City extends Component {
             <Text style={styles.secondary}>CO</Text>
           </View>
         </View>
-        {showErr}
         <View style={styles.buttons}>
           <TouchableHighlight
             style={styles.button}

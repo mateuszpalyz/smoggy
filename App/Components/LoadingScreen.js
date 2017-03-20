@@ -22,16 +22,27 @@ var styles = StyleSheet.create({
     height: 125,
     width: 125,
     alignSelf: 'center'
+  },
+  error: {
+    color: 'red',
+    fontSize: 25,
+    textAlign: 'center'
   }
 });
 
 export default class LoadingScreen extends Component {
   render () {
+    var showErr = (this.props.error ? <Text style={styles.error}>{this.props.error}</Text> : <View></View>);
     return (
       <View style={styles.container}>
         <Image style={styles.image} source={require('../Images/tower-and-fumes.png')}/>
         <Text style={styles.title}>Smoggy</Text>
-        <ActivityIndicator color="#FCFCFC" size="large"></ActivityIndicator>
+        <ActivityIndicator
+          animating={!this.props.error}
+          color="#FCFCFC"
+          size="large">
+        </ActivityIndicator>
+        {showErr}
       </View>
     )
   }
