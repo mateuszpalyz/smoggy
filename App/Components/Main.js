@@ -24,31 +24,37 @@ export default class Main extends Component {
   }
 
   loadInitialData() {
-    api.getPolutionByCity('wrocław')
-      .then((res) => {
-        if(res.status === 'error'){
-          this.setState({
-            error: res.data,
-            isLoading: false
+    navigator.geolocation.getCurrentPosition(
+      (p) => {
+        // Math.round is used due to error in aqi api, it returns order of coordinates when longitude is not int
+        api.getPolutionByCoordinates(p.coords.latitude, Math.round(p.coords.longitude))
+          .then((res) => {
+            if(res.status === 'error'){
+              console.log(res.data);
+              this.setState({
+                error: res.data
+              });
+            } else {
+              this.setState({
+                isLoading: false,
+                data: res.data
+              });
+            }
+          })
+          .catch((error) => {
+            this.setState({
+              error: error
+            });
           });
-        } else {
-          this.setState({
-            isLoading: false,
-            data: res.data
-          });
-        }
-      })
-      .catch((error) => {
-        this.setState({
-          error: error,
-          isLoading: false
-        });
-      });
+      },
+      (error) => console.log(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
   }
 
   render () {
     var page = (
-      this.state.isLoading ? <LoadingScreen/> : <City data={this.state.data} error={this.state.error} navigator={this.props.navigator}/>
+      this.state.isLoading ? <LoadingScreen error={this.state.error}/> : <City data={this.state.data} navigator={this.props.navigator}/>
     );
     return (
       <View style={styles.mainContainer}>
